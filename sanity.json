@@ -1,0 +1,22 @@
+{
+  "api": {
+    "projectId": "${NEXT_PUBLIC_SANITY_PROJECT_ID}",
+    "dataset": "${NEXT_PUBLIC_SANITY_DATASET}"
+  },
+  "plugins": [
+    "@sanity/vision"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "@sanity/vision"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./src/sanity/schemaTypes"
+    }
+  ]
+}
