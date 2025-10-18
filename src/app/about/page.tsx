@@ -28,14 +28,11 @@ export default function AboutPage() {
           
           <div className="flex items-center justify-center">
             <a
-              href="#contact"
+              href="/contact"
               className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl"
               style={{ backgroundColor: "var(--accent)" }}
             >
               <span className="group-hover:tracking-wider transition-all duration-300">Get In Touch</span>
-              <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
             </a>
           </div>
         </div>

@@ -43,83 +43,131 @@ export default function HomePage() {
             loop
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover object-bottom"
+            className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ zIndex: -1 }}
-            onError={(e) => {
-              console.log('Video failed to load:', e);
-            }}
           >
             <source src="/homebackground.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
           {/* Fallback Background Image */}
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center object-bottom"
-            style={{
-              backgroundImage: 'url(/homebackground.mp4)',
-              zIndex: -2
-            }}
-          />
+          <div className="absolute inset-0 w-full h-full">
+            <Image
+              src="/background.webp"
+              alt="Wedding Photography Background"
+              width={1920}
+              height={1080}
+              className="w-full h-full object-cover object-center opacity-30"
+              style={{ zIndex: -2 }}
+            />
+          </div>
 
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/70" />
 
-          {/* Content Overlay */}
+          {/* Content */}
           <div
             ref={heroReveal.ref}
-            className={`absolute inset-0 flex items-center justify-center text-center px-6 transition-all duration-700 ${
-              heroReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+            className={`relative h-full flex items-center justify-center px-6 transition-all duration-1000 ${
+              heroReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="max-w-5xl">
+            <div className="max-w-4xl text-center">
+              {/* Main Heading */}
               <div className="mb-8">
                 <h1
-                  className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-wide opacity-0 translate-y-4 animate-fade-in-up"
+                  className="text-5xl md:text-7xl lg:text-8xl font-light text-white mb-6 leading-none tracking-tight opacity-0 translate-y-8 animate-fade-in-up"
                   style={{
                     fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(2.5rem, 4vw, 4rem)",
-                    animationDelay: "0.2s",
+                    animationDelay: "0.3s",
                     animationFillMode: "forwards"
                   }}
                 >
-                  Your Story, <span className="block accent-text font-medium">Through Our Lens</span>
+                  <span className="block">Weddings</span>
+                  <span className="block text-3xl md:text-4xl lg:text-5xl font-thin text-amber-300 mt-2 tracking-widest">
+                    BY ARTISTIC
+                  </span>
                 </h1>
               </div>
+
+              {/* Subtitle */}
               <p
-                className="text-base md:text-xl text-white/95 font-light max-w-3xl mx-auto leading-relaxed tracking-wide opacity-0 translate-y-4 animate-fade-in-up"
+                className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light tracking-wide opacity-0 translate-y-8 animate-fade-in-up"
                 style={{
-                  fontSize: "clamp(1rem, 1.5vw, 1.5rem)",
                   animationDelay: "0.6s",
                   animationFillMode: "forwards"
                 }}
               >
-                Capturing the essence of your special moments with artistic vision and timeless elegance.
+                Capturing timeless moments with artistic vision and elegant simplicity
               </p>
-              <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-                <a
-                  href="#gallery"
-                  className="group rounded-full px-8 py-4 text-white border-2 border-white/30 hover:border-white transition-all duration-300 hover:bg-white/10 backdrop-blur-sm"
+
+              {/* Decorative Line */}
+              <div
+                className="w-24 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-8 opacity-0 translate-y-8 animate-fade-in-up"
+                style={{
+                  animationDelay: "0.9s",
+                  animationFillMode: "forwards"
+                }}
+              />
+
+              {/* CTA Buttons */}
+              <div
+                className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 translate-y-8 animate-fade-in-up"
+                style={{
+                  animationDelay: "1.2s",
+                  animationFillMode: "forwards"
+                }}
+              >
+                <Link
+                  href="/portfolio"
+                  className="group relative px-8 py-4 text-white border border-white/20 hover:border-white/40 transition-all duration-500 hover:bg-white/5 backdrop-blur-sm min-w-[200px]"
                 >
-                  <span className="group-hover:tracking-wider transition-all duration-300">View Portfolio</span>
-                </a>
+                  <span className="relative z-10 font-light tracking-wide group-hover:tracking-wider transition-all duration-300">
+                    View Our Work
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/0 via-amber-500/10 to-amber-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </Link>
+                
                 <Link
                   href="/contact"
-                  className="group rounded-full px-8 py-4 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  className="group relative px-8 py-4 text-black font-medium transition-all duration-500 hover:scale-105 min-w-[200px]"
                   style={{ backgroundColor: "var(--accent)" }}
                 >
-                  <span className="group-hover:tracking-wider transition-all duration-300">Book a Shoot</span>
+                  <span className="relative z-10 tracking-wide group-hover:tracking-wider transition-all duration-300">
+                    Start Your Story
+                  </span>
+                  <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
+              </div>
+
+              {/* Location Badge */}
+              <div
+                className="mt-16 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-gray-300 opacity-0 translate-y-8 animate-fade-in-up"
+                style={{
+                  animationDelay: "1.5s",
+                  animationFillMode: "forwards"
+                }}
+              >
+                <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>Based in Delhi, India</span>
               </div>
             </div>
           </div>
 
           {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="animate-bounce">
-              <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
+          <div
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-8 animate-fade-in-up"
+            style={{
+              animationDelay: "1.8s",
+              animationFillMode: "forwards"
+            }}
+          >
+            <div className="flex flex-col items-center gap-2 text-white/60">
+              <span className="text-xs font-light tracking-widest uppercase">Scroll</span>
+              <div className="w-px h-8 bg-gradient-to-b from-amber-400 to-transparent animate-pulse" />
             </div>
           </div>
         </div>
@@ -196,26 +244,24 @@ export default function HomePage() {
 
           {/* Masonry Gallery */}
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 [&_div]:mb-6">
-            {Array.from({ length: 6 }).map((_, index) => (
+            {[
+              { src: "/featuredwork1.webp", title: "Elegant Wedding", location: "Delhi, India" },
+              { src: "/featuredwork2.webp", title: "Pre-Wedding Shoot", location: "Goa, India" },
+              { src: "/featuredwork3.webp", title: "Destination Wedding", location: "Udaipur, India" },
+              { src: "/featuredwork4.webp", title: "Intimate Ceremony", location: "Mumbai, India" },
+              { src: "/featuredwork5.webp", title: "Traditional Wedding", location: "Punjab, India" },
+              { src: "/featuredwork6.webp", title: "Garden Wedding", location: "Bangalore, India" }
+            ].map((work, index) => (
               <div key={index} className="break-inside-avoid">
-                <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-100 to-amber-200 aspect-[4/5] flex items-center justify-center">
-                  <div className="text-center text-amber-700">
-                    <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <p className="text-sm">Featured Work #{index + 1}</p>
-                  </div>
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <h3 className="text-lg font-medium mb-2" style={{ fontFamily: "var(--font-heading)" }}>
-                        Wedding Photography
-                      </h3>
-                      <p className="text-sm opacity-90">Delhi, India</p>
-                    </div>
-                  </div>
-                </div>
+                <Link href="/portfolio" className="block group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer">
+          <Image
+                    src={work.src}
+                    alt={work.title}
+                    width={400}
+                    height={500}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </Link>
               </div>
             ))}
           </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -11,12 +12,21 @@ export default function Footer() {
             <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-10 px-6 md:px-10">
             {/* Left: Logo + Tagline */}
             <div>
-                <div className="text-center mb-4">
-                  <div className="text-sm font-light tracking-[0.2em] uppercase text-gray-600 mb-1" style={{ fontFamily: "var(--font-heading)" }}>
-                    WEDDINGS BY
-                  </div>
-                  <div className="text-2xl font-bold tracking-wide text-gray-800" style={{ fontFamily: "var(--font-heading)" }}>
-                    ARTISTIC
+                <div className="flex items-center justify-center mb-4">
+                  <Image
+                    src="/logo.webp"
+                    alt="WEDDINGS BY ARTISTIC"
+                    width={40}
+                    height={40}
+                    className="mr-3"
+                  />
+                  <div>
+                    <div className="text-sm font-light tracking-[0.2em] uppercase text-gray-600 mb-1" style={{ fontFamily: "var(--font-heading)" }}>
+                      WEDDINGS BY
+                    </div>
+                    <div className="text-2xl font-bold tracking-wide text-gray-800" style={{ fontFamily: "var(--font-heading)" }}>
+                      ARTISTIC
+                    </div>
                   </div>
                 </div>
                 <p className="text-sm text-gray-600 text-center">Capturing Forever Moments</p>
