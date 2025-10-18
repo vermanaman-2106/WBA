@@ -17,11 +17,99 @@ export default function PortfolioPage() {
     async function fetchImages() {
       try {
         const images = await getGalleryImages();
+        console.log('Fetched images from Sanity:', images);
         setGalleryImages(images || []);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching gallery images:', error);
-        setGalleryImages([]);
+        // Fallback to static images if Sanity fails
+        const fallbackImages = [
+          {
+            _id: 'fallback-1',
+            title: 'Elegant Wedding',
+            description: 'A beautiful traditional wedding ceremony',
+            location: 'Delhi, India',
+            category: 'weddings',
+            mediaType: 'image',
+            image: {
+              asset: {
+                url: '/featuredwork1.webp'
+              },
+              alt: 'Elegant Wedding'
+            }
+          },
+          {
+            _id: 'fallback-2',
+            title: 'Pre-Wedding Shoot',
+            description: 'Romantic pre-wedding photography session',
+            location: 'Goa, India',
+            category: 'preweddings',
+            mediaType: 'image',
+            image: {
+              asset: {
+                url: '/featuredwork2.webp'
+              },
+              alt: 'Pre-Wedding Shoot'
+            }
+          },
+          {
+            _id: 'fallback-3',
+            title: 'Destination Wedding',
+            description: 'Stunning destination wedding celebration',
+            location: 'Udaipur, India',
+            category: 'destination',
+            mediaType: 'image',
+            image: {
+              asset: {
+                url: '/featuredwork3.webp'
+              },
+              alt: 'Destination Wedding'
+            }
+          },
+          {
+            _id: 'fallback-4',
+            title: 'Intimate Ceremony',
+            description: 'Beautiful intimate wedding ceremony',
+            location: 'Mumbai, India',
+            category: 'weddings',
+            mediaType: 'image',
+            image: {
+              asset: {
+                url: '/featuredwork4.webp'
+              },
+              alt: 'Intimate Ceremony'
+            }
+          },
+          {
+            _id: 'fallback-5',
+            title: 'Traditional Wedding',
+            description: 'Classic traditional wedding celebration',
+            location: 'Punjab, India',
+            category: 'weddings',
+            mediaType: 'image',
+            image: {
+              asset: {
+                url: '/featuredwork5.webp'
+              },
+              alt: 'Traditional Wedding'
+            }
+          },
+          {
+            _id: 'fallback-6',
+            title: 'Garden Wedding',
+            description: 'Romantic garden wedding celebration',
+            location: 'Bangalore, India',
+            category: 'destination',
+            mediaType: 'image',
+            image: {
+              asset: {
+                url: '/featuredwork6.webp'
+              },
+              alt: 'Garden Wedding'
+            }
+          }
+        ];
+        setGalleryImages(fallbackImages);
         setLoading(false);
       }
     }

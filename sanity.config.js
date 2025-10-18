@@ -35,7 +35,7 @@ export default defineConfig({
     apiVersion,
     useCdn: false, // Use CDN in production, but not in development
   },
-  // Add CORS origins for local development
+  // Add CORS origins for local development and production
   cors: {
     origins: [
       'http://localhost:3000',
@@ -47,7 +47,12 @@ export default defineConfig({
       'http://127.0.0.1:3001',
       'http://127.0.0.1:3002',
       'http://127.0.0.1:3003',
-      'http://127.0.0.1:3333'
+      'http://127.0.0.1:3333',
+      // Vercel production domains
+      'https://wba-bsdum4mv2-naman-s-projects-b59abela.vercel.app',
+      'https://*.vercel.app',
+      'https://weddingsbyartistic.vercel.app',
+      'https://weddingsbyartistic.com'
     ]
   },
 })
