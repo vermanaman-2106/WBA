@@ -7,6 +7,96 @@ import { GalleryImage } from "@/sanity/lib/types";
 
 const filters = ["All", "Weddings", "Pre-Weddings", "Destination"] as const;
 
+// Fallback images function
+function getFallbackImages() {
+  return [
+    {
+      _id: 'fallback-1',
+      title: 'Elegant Wedding',
+      description: 'A beautiful traditional wedding ceremony',
+      location: 'Delhi, India',
+      category: 'wedding',
+      mediaType: 'image',
+      image: {
+        asset: {
+          url: '/featuredwork1.webp'
+        },
+        alt: 'Elegant Wedding'
+      }
+    },
+    {
+      _id: 'fallback-2',
+      title: 'Pre-Wedding Shoot',
+      description: 'Romantic pre-wedding photography session',
+      location: 'Goa, India',
+      category: 'prewedding',
+      mediaType: 'image',
+      image: {
+        asset: {
+          url: '/featuredwork2.webp'
+        },
+        alt: 'Pre-Wedding Shoot'
+      }
+    },
+    {
+      _id: 'fallback-3',
+      title: 'Destination Wedding',
+      description: 'Stunning destination wedding celebration',
+      location: 'Udaipur, India',
+      category: 'destination',
+      mediaType: 'image',
+      image: {
+        asset: {
+          url: '/featuredwork3.webp'
+        },
+        alt: 'Destination Wedding'
+      }
+    },
+    {
+      _id: 'fallback-4',
+      title: 'Intimate Ceremony',
+      description: 'Beautiful intimate wedding ceremony',
+      location: 'Mumbai, India',
+      category: 'wedding',
+      mediaType: 'image',
+      image: {
+        asset: {
+          url: '/featuredwork4.webp'
+        },
+        alt: 'Intimate Ceremony'
+      }
+    },
+    {
+      _id: 'fallback-5',
+      title: 'Traditional Wedding',
+      description: 'Classic traditional wedding celebration',
+      location: 'Punjab, India',
+      category: 'wedding',
+      mediaType: 'image',
+      image: {
+        asset: {
+          url: '/featuredwork5.webp'
+        },
+        alt: 'Traditional Wedding'
+      }
+    },
+    {
+      _id: 'fallback-6',
+      title: 'Garden Wedding',
+      description: 'Romantic garden wedding celebration',
+      location: 'Bangalore, India',
+      category: 'destination',
+      mediaType: 'image',
+      image: {
+        asset: {
+          url: '/featuredwork6.webp'
+        },
+        alt: 'Garden Wedding'
+      }
+    }
+  ] as GalleryImage[];
+}
+
 export default function PortfolioPage() {
   const [active, setActive] = useState<(typeof filters)[number]>("All");
   const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
@@ -16,100 +106,29 @@ export default function PortfolioPage() {
   useEffect(() => {
     async function fetchImages() {
       try {
+        console.log('Attempting to fetch images from Sanity...');
         const images = await getGalleryImages();
-        console.log('Fetched images from Sanity:', images);
-        setGalleryImages(images || []);
+        console.log('✅ Successfully fetched images from Sanity:', images);
+        console.log('Number of images:', images?.length || 0);
+        if (images && images.length > 0) {
+          console.log('First image:', images[0]);
+          setGalleryImages(images);
+        } else {
+          console.log('⚠️ No images returned from Sanity, using fallback');
+          setGalleryImages(getFallbackImages());
+        }
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching gallery images:', error);
-        // Fallback to static images if Sanity fails
-        const fallbackImages = [
-          {
-            _id: 'fallback-1',
-            title: 'Elegant Wedding',
-            description: 'A beautiful traditional wedding ceremony',
-            location: 'Delhi, India',
-            category: 'weddings',
-            mediaType: 'image',
-            image: {
-              asset: {
-                url: '/featuredwork1.webp'
-              },
-              alt: 'Elegant Wedding'
-            }
-          },
-          {
-            _id: 'fallback-2',
-            title: 'Pre-Wedding Shoot',
-            description: 'Romantic pre-wedding photography session',
-            location: 'Goa, India',
-            category: 'preweddings',
-            mediaType: 'image',
-            image: {
-              asset: {
-                url: '/featuredwork2.webp'
-              },
-              alt: 'Pre-Wedding Shoot'
-            }
-          },
-          {
-            _id: 'fallback-3',
-            title: 'Destination Wedding',
-            description: 'Stunning destination wedding celebration',
-            location: 'Udaipur, India',
-            category: 'destination',
-            mediaType: 'image',
-            image: {
-              asset: {
-                url: '/featuredwork3.webp'
-              },
-              alt: 'Destination Wedding'
-            }
-          },
-          {
-            _id: 'fallback-4',
-            title: 'Intimate Ceremony',
-            description: 'Beautiful intimate wedding ceremony',
-            location: 'Mumbai, India',
-            category: 'weddings',
-            mediaType: 'image',
-            image: {
-              asset: {
-                url: '/featuredwork4.webp'
-              },
-              alt: 'Intimate Ceremony'
-            }
-          },
-          {
-            _id: 'fallback-5',
-            title: 'Traditional Wedding',
-            description: 'Classic traditional wedding celebration',
-            location: 'Punjab, India',
-            category: 'weddings',
-            mediaType: 'image',
-            image: {
-              asset: {
-                url: '/featuredwork5.webp'
-              },
-              alt: 'Traditional Wedding'
-            }
-          },
-          {
-            _id: 'fallback-6',
-            title: 'Garden Wedding',
-            description: 'Romantic garden wedding celebration',
-            location: 'Bangalore, India',
-            category: 'destination',
-            mediaType: 'image',
-            image: {
-              asset: {
-                url: '/featuredwork6.webp'
-              },
-              alt: 'Garden Wedding'
-            }
-          }
-        ];
-        setGalleryImages(fallbackImages);
+        console.error('❌ Error fetching gallery images:', error);
+        console.log('🔄 Using fallback images due to error');
+        
+        // Check if it's a CORS error and show helpful message
+        if (error instanceof Error && error.message.includes('CORS')) {
+          console.log('🚫 CORS error detected. Please check Sanity CORS settings.');
+          console.log('Current origin:', window.location.origin);
+        }
+        
+        setGalleryImages(getFallbackImages());
         setLoading(false);
       }
     }
@@ -120,9 +139,16 @@ export default function PortfolioPage() {
   // Filter images based on active category
   const filteredImages = active === "All" 
     ? galleryImages 
-    : galleryImages.filter(image => 
-        image.category.toLowerCase() === active.toLowerCase().replace('-', '')
-      );
+    : galleryImages.filter(image => {
+        const imageCategory = image.category?.toLowerCase() || '';
+        const filterCategory = active.toLowerCase().replace('-', '');
+        return imageCategory === filterCategory || imageCategory === filterCategory + 's';
+      });
+
+  // Debug logging
+  console.log('Active filter:', active);
+  console.log('Total gallery images:', galleryImages.length);
+  console.log('Filtered images:', filteredImages.length);
 
   return (
     <div className="w-full">
