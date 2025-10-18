@@ -64,14 +64,18 @@ export default function PortfolioPage() {
           <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-16 bg-gradient-to-br from-white to-amber-50">
 
       <div className="flex flex-wrap gap-3 mb-8">
-        {filters.map((f) => (
+        {filters.map((f, index) => (
             <button
               key={f}
               onClick={() => setActive(f)}
-              className={`rounded-full px-4 py-2 text-sm transition-colors border ${
-                active === f ? "text-white" : "text-gray-700 hover:text-gray-800"
+              className={`rounded-full px-4 py-2 text-sm transition-all duration-300 border hover-scale ${
+                active === f ? "text-white shadow-lg" : "text-gray-700 hover:text-gray-800 hover:shadow-md"
               }`}
-              style={{ backgroundColor: active === f ? "var(--accent)" : "transparent", borderColor: "var(--accent)" }}
+              style={{ 
+                backgroundColor: active === f ? "var(--accent)" : "transparent", 
+                borderColor: "var(--accent)",
+                animationDelay: `${0.2 + index * 0.1}s`
+              }}
             >
               {f}
             </button>
@@ -87,9 +91,9 @@ export default function PortfolioPage() {
           </div>
         ) : filteredImages.length > 0 ? (
           <div className="columns-1 sm:columns-2 md:columns-3 gap-4 [&_div]:mb-4">
-            {filteredImages.map((item) => (
-              <div key={item._id} className="break-inside-avoid group">
-                <div className="relative overflow-hidden rounded-xl bg-amber-100 aspect-[4/5]">
+            {filteredImages.map((item, index) => (
+              <div key={item._id} className="break-inside-avoid group animate-fade-in-scale" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
+                <div className="relative overflow-hidden rounded-xl bg-amber-100 aspect-[4/5] hover-lift">
                   {item.mediaType === 'video' ? (
                     // Video content
                     item.video?.asset?.url || item.videoUrl ? (

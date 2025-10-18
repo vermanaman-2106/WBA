@@ -174,47 +174,47 @@ export default function HomePage() {
       </section>
 
       {/* About Preview Section */}
-      <section id="about" ref={aboutReveal.ref} className={`w-full px-4 sm:px-6 py-20 bg-gradient-to-br from-white to-amber-50 transition-all duration-700 ${
-        aboutReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      <section id="about" ref={aboutReveal.ref} className={`w-full px-4 sm:px-6 py-20 bg-gradient-to-br from-white to-amber-50 transition-all duration-1000 ${
+        aboutReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}>
         <div className="mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Portrait Image */}
             <div className="order-2 md:order-1">
-              <div className="aspect-[4/5] w-full rounded-3xl overflow-hidden">
+              <div className="aspect-[4/5] w-full rounded-3xl overflow-hidden hover-lift group">
           <Image
                   src="/about.webp"
                   alt="Photographer portrait"
                   width={600}
                   height={750}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
             </div>
 
             {/* About Content */}
             <div className="order-1 md:order-2">
-              <h2 className="text-4xl md:text-5xl mb-8 text-gray-800" style={{ fontFamily: "var(--font-heading)" }}>
+              <h2 className="text-4xl md:text-5xl mb-8 text-gray-800 animate-fade-in-up delay-200" style={{ fontFamily: "var(--font-heading)" }}>
                 Behind the <span className="accent-text">Lens</span>
               </h2>
               <div className="space-y-6 text-gray-600 leading-relaxed">
-                <p>
+                <p className="animate-fade-in-up delay-300">
                   I'm a Delhi-based wedding photographer with a passion for capturing the most
                   intimate and beautiful moments of your special day. With years of experience
                   in both traditional and destination weddings, I specialize in creating
                   cinematic, timeless imagery that tells your unique love story.
                 </p>
-                <p>
+                <p className="animate-fade-in-up delay-400">
                   My approach combines editorial elegance with authentic emotion, ensuring that
                   every photograph not only looks stunning but also captures the genuine feelings
                   and connections that make your wedding day truly special.
                 </p>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-8 animate-fade-in-up delay-500">
                 <Link
                   href="/about"
-                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95"
+                  className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-white font-medium transition-all duration-500 hover:scale-105 hover:shadow-xl active:scale-95 hover-glow"
                   style={{ backgroundColor: "var(--accent)" }}
                 >
                   <span className="group-hover:tracking-wider transition-all duration-300">Know More</span>
@@ -229,15 +229,15 @@ export default function HomePage() {
       </section>
 
       {/* Featured Work Section */}
-      <section id="gallery" ref={featuredReveal.ref} className={`w-full px-4 sm:px-6 py-20 bg-gradient-to-br from-amber-50 to-white transition-all duration-700 ${
-        featuredReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      <section id="gallery" ref={featuredReveal.ref} className={`w-full px-4 sm:px-6 py-20 bg-gradient-to-br from-amber-50 to-white transition-all duration-1000 ${
+        featuredReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}>
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl mb-6 text-gray-800" style={{ fontFamily: "var(--font-heading)" }}>
+            <h2 className="text-4xl md:text-5xl mb-6 text-gray-800 animate-fade-in-up delay-200" style={{ fontFamily: "var(--font-heading)" }}>
               Featured <span className="accent-text">Work</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up delay-300">
               A curated selection of our most cherished moments, showcasing the beauty and emotion of your special day.
             </p>
           </div>
@@ -252,15 +252,17 @@ export default function HomePage() {
               { src: "/featuredwork5.webp", title: "Traditional Wedding", location: "Punjab, India" },
               { src: "/featuredwork6.webp", title: "Garden Wedding", location: "Bangalore, India" }
             ].map((work, index) => (
-              <div key={index} className="break-inside-avoid">
-                <Link href="/portfolio" className="block group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer">
+              <div key={index} className="break-inside-avoid animate-fade-in-scale" style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
+                <Link href="/portfolio" className="block group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer hover-lift">
           <Image
                     src={work.src}
                     alt={work.title}
                     width={400}
                     height={500}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </Link>
               </div>
             ))}
@@ -283,15 +285,15 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section ref={testimonialsReveal.ref} className={`w-full px-4 sm:px-6 py-20 bg-gradient-to-br from-white to-amber-50 transition-all duration-700 ${
-        testimonialsReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      <section ref={testimonialsReveal.ref} className={`w-full px-4 sm:px-6 py-20 bg-gradient-to-br from-white to-amber-50 transition-all duration-1000 ${
+        testimonialsReveal.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       }`}>
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl mb-6 text-gray-800" style={{ fontFamily: "var(--font-heading)" }}>
+            <h2 className="text-4xl md:text-5xl mb-6 text-gray-800 animate-fade-in-up delay-200" style={{ fontFamily: "var(--font-heading)" }}>
               What <span className="accent-text">Couples Say</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up delay-300">
               The stories and memories we've captured together, told through the voices of the couples we've had the privilege to work with.
             </p>
           </div>
@@ -314,8 +316,8 @@ export default function HomePage() {
                 rating: 5
               }
             ].map((testimonial, index) => (
-              <div key={index} className="group">
-                <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-amber-200">
+              <div key={index} className="group animate-fade-in-scale" style={{ animationDelay: `${0.4 + index * 0.2}s` }}>
+                <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 border border-amber-200 hover-lift">
                   <div className="flex items-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
