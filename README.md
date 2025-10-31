@@ -1,6 +1,18 @@
 # WEDDINGS BY ARTISTIC - Photography Website
 
-A modern, luxury photography website built with Next.js 15, Sanity CMS, and Tailwind CSS. Features a beautiful, responsive design with automatic content management through Sanity Studio.
+## 📖 About the Website
+
+**WEDDINGS BY ARTISTIC** is a premium wedding photography website that showcases the artistry and expertise of a professional wedding photographer. The website serves as a digital portfolio, allowing potential clients to explore stunning wedding photography work, learn about the photographer's background, and easily get in touch for consultations.
+
+Built with cutting-edge web technologies, this website combines elegant design with powerful content management capabilities. The site features a sophisticated white, beige, and soft gold color scheme that reflects luxury and timeless elegance—perfect for a high-end wedding photography business.
+
+### Key Highlights:
+- **Portfolio Showcase**: A dynamic gallery that displays wedding photography work organized by categories (Weddings, Pre-Weddings, Destination weddings), making it easy for visitors to find the style that resonates with them
+- **Content Management**: Powered by Sanity CMS, allowing seamless updates to the portfolio without touching code—simply upload new images or videos through the Sanity Studio interface
+- **Professional Presentation**: Every page is designed to reflect the quality and attention to detail that clients can expect in their wedding photography
+- **User Experience**: Smooth animations, responsive design, and intuitive navigation ensure visitors have an engaging experience across all devices
+
+The website is designed to convert visitors into clients by showcasing the photographer's best work, building trust through testimonials, and making it easy to get in touch for bookings.
 
 ## 🎨 Features
 
